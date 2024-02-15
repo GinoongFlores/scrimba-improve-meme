@@ -1,0 +1,134 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+	--bd: linear-gradient(to right, #672280, #a626d3);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: inherit;
+}
+
+main {
+	padding: 36px;
+}
+
+/* header */
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+	background-image: var(--bd);
+}
+
+.header--image {
+	height: 100%;
+	width: auto;
+	max-width: 40px;
+	margin: 6px 0;
+}
+
+.header--title {
+	font-size: 1rem;
+}
+
+/* form */
+
+.form {
+	display: grid;
+	/* 2 rows / 2 columns by 1 fraction */
+	grid-template: repeat(2, 40px) / repeat(2, 1fr);
+	gap: 17px;
+}
+
+.form--button {
+	/* grid start on row 1 and ends on row -1 */
+	grid-column: 1 / span 2;
+	border-radius: 5px;
+	font-size: 1rem;
+
+	color: white;
+	background-image: var(--bd);
+	border: none;
+	cursor: pointer;
+}
+
+.form--input {
+	border-radius: 5px;
+	text-indent: 6px;
+	border: 1px solid #d5d4d8;
+}
+
+.meme-img {
+	width: 100%;
+	max-width: 427px;
+	border-radius: 2px;
+}
+
+.meme {
+	position: relative;
+	grid-column: span 2;
+	justify-self: center;
+	align-self: center;
+}
+
+.meme--text {
+	position: absolute;
+	width: 80%;
+	text-align: center;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 15px 0;
+	padding: 0 5px;
+	font-family: impact, sans-serif;
+	font-size: 2em;
+	text-transform: uppercase;
+	color: white;
+	letter-spacing: 1px;
+	text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
+		-2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
+		2px 2px 5px #000;
+}
+
+.top {
+	top: 0;
+}
+
+.bottom {
+	bottom: 0;
+}
+
+/* for bigger  */
+@media screen and (min-width: 520px) {
+	.header--title {
+		font-size: 1.25rem;
+	}
+
+	header {
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		height: 65px;
+		/* this decrease the size of the image header */
+		padding: 20px;
+	}
+
+	.header--image {
+		width: auto;
+		margin-right: 6px;
+	}
+
+	.header--title {
+		/* add a right margin based on the remaining space */
+		margin-right: auto;
+	}
+}
