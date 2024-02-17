@@ -1,6 +1,7 @@
 import "../index.css";
 // import memesData from "../memesData"; no need to import this as we are fetching the data from the api
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Meme = () => {
 	const [meme, setMeme] = useState({
@@ -10,40 +11,43 @@ const Meme = () => {
 	});
 
 	const [allMeme, setAllMeme] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		async function getMemes() {
 			try {
-				const res = await fetch("https://api.imgflip.com/get_memes");
-				const data = await res.json();
-				setAllMeme(data.data.memes); // this changes the state of allMeme.
+				setIsLoading(true);
+				const res = await axios.get("https://api.imgflip.com/get_memes");
+				// console.log(res);
+				setAllMeme(res.data.data.memes); // this changes the state of allMeme.
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		getMemes();
 
-		// fetch("https://api.imgflip.com/get_memes")
-		// 	.then((res) => res.json())
-		// 	.then((data) => setAllMeme(data.data.memes)); // this changes the state of allMeme.
+		const savedMeme = localStorage.getItem("meme");
+		if (savedMeme) {
+			setMeme(JSON.parse(savedMeme));
+		}
 	}, []);
 
-	function getMemeImg() {
+	const getMemeImg = () => {
 		const randomNumber = Math.floor(Math.random() * allMeme.length); // random number between 1 and 100
 		let url = allMeme[randomNumber].url; // url of the meme at the random position
 		setMeme((prevMeme) => ({
 			...prevMeme,
 			randomImage: url,
 		}));
-	}
+	};
 
-	function handleChange(event) {
+	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setMeme((prevMeme) => ({
 			...prevMeme,
 			[name]: value,
 		}));
-	}
+	};
 
 	return (
 		<main>
@@ -65,10 +69,15 @@ const Meme = () => {
 					onChange={handleChange}
 				/>
 				<button type="button" onClick={getMemeImg} className="form--button">
-					Get a new meme image 🖼
+					Get a new meme image 🖼️
 				</button>
+
 				<div className="meme">
-					<img src={meme.randomImage} alt="image meme" className="meme-img" />
+					{!isLoading ? (
+						<div>Loading...</div>
+					) : (
+						<img src={meme.randomImage} alt="image meme" className="meme-img" />
+					)}
 					<h2 className="meme--text top">{meme.topText}</h2>
 					<h2 className="meme--text bottom">{meme.bottomText}</h2>
 				</div>
