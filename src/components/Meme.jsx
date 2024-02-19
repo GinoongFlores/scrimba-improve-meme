@@ -51,28 +51,38 @@ const Meme = () => {
 
 	return (
 		<main>
-			<form className="form">
-				<input
-					type="text"
-					name="topText"
-					value={meme.topText}
-					placeholder="Top Text"
-					className="form--input"
-					onChange={handleChange}
-				/>
-				<input
-					type="text"
-					name="bottomText"
-					value={meme.bottomText}
-					placeholder="Bottom Text"
-					className="form--input"
-					onChange={handleChange}
-				/>
-				<button type="button" onClick={getMemeImg} className="form--button">
-					Get a new meme image 🖼️
-				</button>
+			<form className="flex flex-col sm:grid col-span-2 grid-cols-2 gap-4">
+				<div>
+					<input
+						type="text"
+						name="topText"
+						value={meme.topText}
+						placeholder="Top Text"
+						className="form--input w-full h-10"
+						onChange={handleChange}
+					/>
+				</div>
+				<div>
+					<input
+						type="text"
+						name="bottomText"
+						value={meme.bottomText}
+						placeholder="Bottom Text"
+						className="form--input w-full h-10"
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="justify-self-center place-self-center col-span-2">
+					<button
+						type="button"
+						onClick={getMemeImg}
+						className="form--button p-3"
+					>
+						Get a new meme image 🖼️
+					</button>
+				</div>
 
-				<div className="meme">
+				<div className="col-span-2 justify-self-center self-center relative">
 					{!isLoading ? (
 						<div>Loading...</div>
 					) : (

@@ -28,10 +28,10 @@ main {
 /* header */
 
 header {
-	display: flex;
+	/* display: flex;
 	align-items: center;
-	flex-direction: row;
-	height: 65px;
+	flex-direction: row; */
+	/* height: 65px; */
 	/* this decrease the size of the image header */
 	padding: 20px;
 	background-image: var(--bd);
@@ -60,7 +60,7 @@ header {
 
 .form--button {
 	/* grid start on row 1 and ends on row -1 */
-	grid-column: 1 / span 2;
+	/* grid-column: 1 / span 2; */
 	border-radius: 5px;
 	font-size: 1rem;
 

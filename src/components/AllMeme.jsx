@@ -59,14 +59,6 @@ export const AllMeme = () => {
 		});
 	};
 
-	const shuffleImages = (array) => {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
-			[array[i], array[j]] = [array[j], array[i]]; // swap elements
-		}
-		return array;
-	};
-
 	return (
 		<>
 			<Header />
@@ -85,7 +77,7 @@ export const AllMeme = () => {
 					</label>
 				</div>
 				{error && <div> Error: {error.message} </div>}
-				<div className="flex justify-between items-center gap-2 py-4">
+				<div className="flex flex-col md:flex-row justify-between items-center gap-2 py-4">
 					<div>
 						<button
 							type="button"
@@ -96,7 +88,7 @@ export const AllMeme = () => {
 						</button>
 					</div>
 					{/* show page numbers */}
-					<div className="flex gap-4">
+					<div className="flex flex-wrap gap-4">
 						{Array.from(
 							{ length: Math.ceil(allMeme.length / memesPerPage) },
 							(_, i) => i + 1
@@ -125,7 +117,7 @@ export const AllMeme = () => {
 				{!isLoading ? (
 					<div>Loading...</div>
 				) : (
-					<div className="grid grid-cols-4 gap-4">
+					<div className="flex flex-col items-center justify-center md:grid grid-cols-4 place-items-center gap-4">
 						{searchMemes(currentMemes).map((meme, index) => {
 							return <MemeImages {...meme} key={index} />;
 						})}
